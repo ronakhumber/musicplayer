@@ -44,6 +44,7 @@ loadPlaylist()
 
 let musicIndex = 1
 let isMusicPaused = true
+loadMusic(musicIndex)
 
 // loadMusic takes indexNumb parameter that starts from 1
 function loadMusic(indexNumb){
@@ -97,3 +98,33 @@ function playingSong(){
     allLiTag[j].setAttribute("onclick", "clicked(this)")
   }
 }
+
+//prev music function
+function prevMusic(){
+  musicIndex-- //decrement of musicIndex by 1
+  //if musicIndex is less than 1 then musicIndex will be the array length so the last music play
+  musicIndex < 1 ? musicIndex = allMusic.length : musicIndex = musicIndex
+  loadMusic(musicIndex)
+  playMusic()
+  playingSong() 
+}
+
+//next music function
+function nextMusic(){
+  musicIndex++ //increment of musicIndex by 1
+  //if musicIndex is greater than array length then musicIndex will be 1 so the first music play
+  musicIndex > allMusic.length ? musicIndex = 1 : musicIndex = musicIndex
+  loadMusic(musicIndex)
+  playMusic()
+  playingSong() 
+}
+
+//prev music button event
+prevBtn.addEventListener("click", ()=>{
+  prevMusic()
+})
+
+//next music button event
+nextBtn.addEventListener("click", ()=>{
+  nextMusic()
+})
