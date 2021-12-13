@@ -42,5 +42,7 @@ function loadPlaylist(){
 // Load playlist on load of document.
 loadPlaylist()
 
+let musicIndex = 1
+let isMusicPaused = true
 
 

@@ -37,6 +37,19 @@ body{
     color: var(--lightblack);
     text-align: center;
 }
+.img-area{
+    width: 100%;
+    height: 256px;
+    overflow: hidden;
+    margin-top: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 12px var(--lightbshadow);
+}
+.img-area img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 .song-details{
     text-align: center;
     margin: 30px;
@@ -158,4 +171,42 @@ body{
     width: 300px;
     pointer-events: auto;
     padding:1em;
+}
+.music-list2 ul{
+    margin: 10px 0;
+    max-height: 260px;
+    overflow: auto;
+}
+.music-list2 ul::-webkit-scrollbar{
+    width: 0px;
+}
+.music-list2 ul li{
+    list-style: none;
+    display: flex;
+    cursor: pointer;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    color: var(--lightblack);
+    border-bottom: 1px solid #E5E5E5;
+}
+.music-list2 ul li:last-child{
+    border-bottom: 0px;
+}
+.music-list2 ul li .row span{
+    font-size: 17px;
+}
+.music-list2 ul li .row p{
+    opacity: 0.9;
+}
+.music-list2 .header, .music-list2 ul li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+ul li .audio-duration{
+    font-size: 16px;
+}
+ul li.playing{
+    pointer-events: none;
+    color: var(--violet);
 }
