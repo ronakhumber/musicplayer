@@ -52,3 +52,48 @@ function loadMusic(indexNumb){
   musicImg.src = `img/${allMusic[indexNumb - 1].src}.jpg`
   mainAudio.src = `songs/${allMusic[indexNumb - 1].src}.mp3`
 }
+
+//play music function
+function playMusic(){
+  outerBox.classList.add("paused")
+  playPauseBtn.querySelector("i").innerText = "pause"
+  mainAudio.play()
+}
+
+//pause music function
+function pauseMusic(){
+  outerBox.classList.remove("paused")
+  playPauseBtn.querySelector("i").innerText = "play_arrow"
+  mainAudio.pause()
+}
+
+// play or pause button event
+playPauseBtn.addEventListener("click", ()=>{
+  const isMusicPlay = outerBox.classList.contains("paused")
+  //if isPlayMusic is true then call pauseMusic else call playMusic
+  isMusicPlay ? pauseMusic() : playMusic()
+  playingSong()
+})
+
+//play particular song from the list onclick of li tag
+function playingSong(){
+  const allLiTag = ulTag.querySelectorAll("li")
+  
+  for (let j = 0; j < allLiTag.length; j++) {
+    let audioTag = allLiTag[j].querySelector(".audio-duration")
+    
+    if(allLiTag[j].classList.contains("playing")){
+      allLiTag[j].classList.remove("playing")
+      let adDuration = audioTag.getAttribute("t-duration")
+      audioTag.innerText = adDuration
+    }
+
+    //if the li tag index is equal to the musicIndex then add playing class in it
+    if(allLiTag[j].getAttribute("li-index") == musicIndex){
+      allLiTag[j].classList.add("playing")
+      audioTag.innerText = "Playing"
+    }
+
+    allLiTag[j].setAttribute("onclick", "clicked(this)")
+  }
+}
