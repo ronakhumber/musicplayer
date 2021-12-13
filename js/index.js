@@ -45,4 +45,10 @@ loadPlaylist()
 let musicIndex = 1
 let isMusicPaused = true
 
-
+// loadMusic takes indexNumb parameter that starts from 1
+function loadMusic(indexNumb){
+  musicName.innerText = allMusic[indexNumb - 1].name
+  musicArtist.innerText = allMusic[indexNumb - 1].artist
+  musicImg.src = `img/${allMusic[indexNumb - 1].src}.jpg`
+  mainAudio.src = `songs/${allMusic[indexNumb - 1].src}.mp3`
+}
