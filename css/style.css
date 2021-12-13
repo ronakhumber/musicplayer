@@ -111,3 +111,44 @@ body{
   align-items: center;
   justify-content: space-between;
 }
+
+.controls i:nth-child(2),
+.controls i:nth-child(4){
+  font-size: 43px;
+}
+.controls #prev{
+  margin-right: -13px;
+}
+.controls #next{
+  margin-left: -13px;
+}
+.controls .play-pause{
+    height: 54px;
+    width: 54px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(var(--darkwhite) 0%, var(--white) 100%);
+    box-shadow: 0px 0px 5px var(--pink);
+}
+.header .row{
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    color: var(--lightblack);
+}
+.header .row i{
+    cursor: default;
+}
+.header .row span{
+    margin-left: 5px;
+}
+.header #close{
+    font-size: 22px;
+    color: var(--lightblack);
+}
+.outerBox i{
+    cursor: pointer;
+  }
