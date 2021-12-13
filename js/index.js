@@ -10,8 +10,12 @@ progressArea = outerBox.querySelector(".progress-area")
 progressBar = progressArea.querySelector(".progress-bar")
 musicList = document.querySelector(".music-list2")
 moreMusicBtn = outerBox.querySelector("#show-playlist")
-
+sortBtn = document.querySelector(".sort")
+filterBtn = document.querySelector(".filter")
+filterform = document.querySelector("#filterform")
 const ulTag = musicList.querySelector("ul")
+let allMusic = allMusicOG
+
 function loadPlaylist(){
   ulTag.innerHTML=""
   for (let i = 0; i < allMusic.length; i++) {
@@ -159,9 +163,49 @@ mainAudio.addEventListener("timeupdate", (e)=>{
 
 //particular li clicked function
 function clicked(element){
-    let getLiIndex = element.getAttribute("li-index")
-    musicIndex = getLiIndex //updating current song index with clicked li index
+  let getLiIndex = element.getAttribute("li-index")
+  musicIndex = getLiIndex //updating current song index with clicked li index
+  loadMusic(musicIndex)
+  playMusic()
+  playingSong()
+}
+
+function sortByName(){
+  allMusic.sort((a,b) => (a.name > b.name) ?1 : -1)
+  loadPlaylist()
+  musicIndex=1
+  loadMusic(musicIndex)
+}
+sortBtn.addEventListener("click",sortByName);
+// Create map of singers
+let artistMap = {}
+allMusic.forEach(function(item){
+    if(artistMap[item.artist]==undefined)
+    artistMap[item.artist]=[]
+
+    artistMap[item.artist].push(item);
+})
+filterBtn.addEventListener("click",function(){
+    if(!document.querySelector(".filter-menu").classList.contains("show")){
+        document.querySelector(".filter-menu").classList.add("show")
+    }
+    else{
+        document.querySelector(".filter-menu").classList.remove("show")
+
+    }
+    let checkbox=`<input type="radio" onclick='handleFilterClick(this)' id="radio-all" checked name="filterArtist"></input> <label for=all>all</label><br>`
+    Object.keys(artistMap).forEach(function(artist){
+        checkbox+=`<input type="radio" onclick='handleFilterClick(this)' name="filterArtist" id="${artist}"></input> <label for=${artist}>${artist}</label><br>`
+    })
+    filterform.innerHTML=checkbox
+})
+function handleFilterClick(ele){
+    allMusic=allMusicOG
+    if(ele.id!="radio-all")
+        allMusic = allMusic.filter(music => music.artist == ele.id)
+    loadPlaylist()
+    musicIndex=1
     loadMusic(musicIndex)
-    playMusic()
-    playingSong()
-  }
+
+    console.log(ele)
+}

@@ -148,13 +148,15 @@ body{
     box-shadow: 0px 0px 5px var(--pink);
 }
 .header .row{
-    display: flex;
     align-items: center;
     font-size: 19px;
     color: var(--lightblack);
+    width:100%;
+    display: flex;
+    justify-content: space-between;
 }
 .header .row i{
-    cursor: default;
+    cursor: pointer;
 }
 .header .row span{
     margin-left: 5px;
@@ -209,4 +211,13 @@ ul li .audio-duration{
 ul li.playing{
     pointer-events: none;
     color: var(--violet);
+}
+.sort {
+    cursor: pointer;
+}
+.filter-menu{
+    display: none;
+}
+.filter-menu.show {
+    display: block;
 }
