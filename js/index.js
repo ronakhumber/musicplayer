@@ -213,3 +213,9 @@ function handleFilterClick(ele){
     musicIndex=1
     loadMusic(musicIndex)
 }
+
+//code for what to do after song ended
+mainAudio.addEventListener("ended", ()=>{
+    console.log("ended")
+    nextMusic()
+})
