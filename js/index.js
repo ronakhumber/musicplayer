@@ -13,6 +13,7 @@ moreMusicBtn = outerBox.querySelector("#show-playlist")
 sortBtn = document.querySelector(".sort")
 filterBtn = document.querySelector(".filter")
 filterform = document.querySelector("#filterform")
+playlist = document.querySelector(".playlist")
 const ulTag = musicList.querySelector("ul")
 let allMusic = allMusicOG
 
@@ -171,6 +172,7 @@ function clicked(element){
 }
 
 function sortByName(){
+  allMusic=allMusicOG
   allMusic.sort((a,b) => (a.name > b.name) ?1 : -1)
   loadPlaylist()
   musicIndex=1
@@ -185,27 +187,29 @@ allMusic.forEach(function(item){
 
     artistMap[item.artist].push(item);
 })
-filterBtn.addEventListener("click",function(){
+function showHideFilter(){
     if(!document.querySelector(".filter-menu").classList.contains("show")){
         document.querySelector(".filter-menu").classList.add("show")
+        playlist.classList.add("hide")
     }
     else{
         document.querySelector(".filter-menu").classList.remove("show")
-
+        playlist.classList.remove("hide")
     }
-    let checkbox=`<input type="radio" onclick='handleFilterClick(this)' id="radio-all" checked name="filterArtist"></input> <label for=all>all</label><br>`
+    let checkbox=`<input type="radio" onclick='handleFilterClick(this)' id="radio-all" name="filterArtist"></input> <label for=all>all</label><br>`
     Object.keys(artistMap).forEach(function(artist){
         checkbox+=`<input type="radio" onclick='handleFilterClick(this)' name="filterArtist" id="${artist}"></input> <label for=${artist}>${artist}</label><br>`
     })
     filterform.innerHTML=checkbox
-})
+}
+filterBtn.addEventListener("click",showHideFilter)
+
 function handleFilterClick(ele){
     allMusic=allMusicOG
     if(ele.id!="radio-all")
         allMusic = allMusic.filter(music => music.artist == ele.id)
+    showHideFilter()
     loadPlaylist()
     musicIndex=1
     loadMusic(musicIndex)
-
-    console.log(ele)
 }

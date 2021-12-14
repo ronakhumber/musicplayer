@@ -221,3 +221,6 @@ ul li.playing{
 .filter-menu.show {
     display: block;
 }
+.playlist.hide{
+    display: none;
+}
