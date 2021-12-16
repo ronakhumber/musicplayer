@@ -1,3 +1,4 @@
+// All DOM elements used throughout the code
 const outerBox = document.querySelector(".outerBox")
 musicImg = outerBox.querySelector(".img-area img")
 musicName = outerBox.querySelector(".song-details .name")
@@ -16,18 +17,24 @@ filterform = document.querySelector("#filterform")
 playlist = document.querySelector(".playlist")
 const ulTag = musicList.querySelector("ul")
 
-
+// allMusicOG will store the original playlist
+// allMusic will be rendered in UI
+// Sort and filter ops will happen on allMusic list only.
 let allMusicOG = []
 let allMusic = []
+// artistMap is to simplify filter.
 let artistMap = {}
+//stores index of music player 1-->n
 let musicIndex = 1
 let isMusicPaused = true
 
+// Method to asyncronously load JSON File
 async function loadMusicJson() {
     let file = await fetch("songList.json")
     let resp = await file.json()
     return resp
 }
+// Loads file and loads playlist and music eventually
 let loadfile =loadMusicJson()
 loadfile.then((resp)=>{
     allMusicOG = resp
@@ -43,6 +50,7 @@ loadfile.then((resp)=>{
     })
 })
 
+// function to create playlist in UI
 function loadPlaylist(){
   ulTag.innerHTML=""
   for (let i = 0; i < allMusic.length; i++) {
@@ -70,9 +78,6 @@ function loadPlaylist(){
     })
   }
 }
-// Load playlist on load of document.
-
-
 
 // loadMusic takes indexNumb parameter that starts from 1
 function loadMusic(indexNumb){
@@ -82,21 +87,21 @@ function loadMusic(indexNumb){
   mainAudio.src = `songs/${allMusic[indexNumb - 1].src}.mp3`
 }
 
-//play music function
+//plays music that is loaded
 function playMusic(){
   outerBox.classList.add("paused")
   playPauseBtn.querySelector("i").innerText = "pause"
   mainAudio.play()
 }
 
-//pause music function
+//pauses already playing music
 function pauseMusic(){
   outerBox.classList.remove("paused")
   playPauseBtn.querySelector("i").innerText = "play_arrow"
   mainAudio.pause()
 }
 
-// play or pause button event
+// Listener on play/pause button
 playPauseBtn.addEventListener("click", ()=>{
   const isMusicPlay = outerBox.classList.contains("paused")
   //if isPlayMusic is true then call pauseMusic else call playMusic
@@ -127,7 +132,7 @@ function playingSong(){
   }
 }
 
-//prev music function
+//previous song
 function prevMusic(){
   musicIndex-- //decrement of musicIndex by 1
   //if musicIndex is less than 1 then musicIndex will be the array length so the last music play
@@ -137,7 +142,7 @@ function prevMusic(){
   playingSong() 
 }
 
-//next music function
+//next song
 function nextMusic(){
   musicIndex++ //increment of musicIndex by 1
   //if musicIndex is greater than array length then musicIndex will be 1 so the first music play
@@ -147,12 +152,12 @@ function nextMusic(){
   playingSong() 
 }
 
-//prev music button event
+//previous button click listner
 prevBtn.addEventListener("click", ()=>{
   prevMusic()
 })
 
-//next music button event
+//next button click listner
 nextBtn.addEventListener("click", ()=>{
   nextMusic()
 })
@@ -194,6 +199,7 @@ function clicked(element){
   playingSong()
 }
 
+// sorts playlist by name and render
 function sortByName(){
   allMusic=allMusicOG
   allMusic.sort((a,b) => (a.name > b.name) ?1 : -1)
@@ -201,9 +207,10 @@ function sortByName(){
   musicIndex=1
   loadMusic(musicIndex)
 }
-sortBtn.addEventListener("click",sortByName);
-// Create map of singers
 
+sortBtn.addEventListener("click",sortByName);
+
+//function to show or hide Filter menu
 function showHideFilter(){
     if(!document.querySelector(".filter-menu").classList.contains("show")){
         document.querySelector(".filter-menu").classList.add("show")
@@ -221,6 +228,7 @@ function showHideFilter(){
 }
 filterBtn.addEventListener("click",showHideFilter)
 
+// Filter click listner
 function handleFilterClick(ele){
     allMusic=allMusicOG
     if(ele.id!="radio-all")
