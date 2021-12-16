@@ -15,7 +15,33 @@ filterBtn = document.querySelector(".filter")
 filterform = document.querySelector("#filterform")
 playlist = document.querySelector(".playlist")
 const ulTag = musicList.querySelector("ul")
-let allMusic = allMusicOG
+
+
+let allMusicOG = []
+let allMusic = []
+let artistMap = {}
+let musicIndex = 1
+let isMusicPaused = true
+
+async function loadMusicJson() {
+    let file = await fetch("songList.json")
+    let resp = await file.json()
+    return resp
+}
+let loadfile =loadMusicJson()
+loadfile.then((resp)=>{
+    allMusicOG = resp
+    allMusic = allMusicOG
+    loadPlaylist()
+    loadMusic(musicIndex)
+
+    allMusic.forEach(function(item){
+    if(artistMap[item.artist]==undefined)
+        artistMap[item.artist]=[]
+
+    artistMap[item.artist].push(item)
+    })
+})
 
 function loadPlaylist(){
   ulTag.innerHTML=""
@@ -45,11 +71,8 @@ function loadPlaylist(){
   }
 }
 // Load playlist on load of document.
-loadPlaylist()
 
-let musicIndex = 1
-let isMusicPaused = true
-loadMusic(musicIndex)
+
 
 // loadMusic takes indexNumb parameter that starts from 1
 function loadMusic(indexNumb){
@@ -180,13 +203,7 @@ function sortByName(){
 }
 sortBtn.addEventListener("click",sortByName);
 // Create map of singers
-let artistMap = {}
-allMusic.forEach(function(item){
-    if(artistMap[item.artist]==undefined)
-    artistMap[item.artist]=[]
 
-    artistMap[item.artist].push(item);
-})
 function showHideFilter(){
     if(!document.querySelector(".filter-menu").classList.contains("show")){
         document.querySelector(".filter-menu").classList.add("show")
