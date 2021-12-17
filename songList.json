@@ -1,32 +1,38 @@
 [
     {
-      "name": "nong Name 1",
-      "artist": "Ronak Sx",
+      "name": "The Nights",
+      "artist": "Avicii",
       "img": "music-1",
       "src": "music-1"
     },
     {
-      "name": "boadng Name 2",
-      "artist": "Ronak S",
+      "name": "Hey Jude",
+      "artist": "The beatles",
       "img": "music-2",
       "src": "music-2"
     },
     {
-      "name": "aong Name 3",
-      "artist": "Ronak Sx",
+      "name": "Don't let me down",
+      "artist": "The beatles",
       "img": "music-3",
       "src": "music-3"
     },
     {
-      "name": "zong Name 4",
-      "artist": "Ronak S",
+      "name": "Wake me Up",
+      "artist": "Avicii",
       "img": "music-4",
       "src": "music-4"
     },
     {
-      "name": "fong Name 5",
-      "artist": "Ronak S",
+      "name": "Come Together",
+      "artist": "Passenger",
       "img": "music-5",
       "src": "music-5"
+    },
+    {
+      "name": "Let her go",
+      "artist": "Passenger",
+      "img": "music-6",
+      "src": "music-6"
     }
 ]
