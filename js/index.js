@@ -39,9 +39,12 @@ let loadfile =loadMusicJson()
 loadfile.then((resp)=>{
     allMusicOG = resp
     allMusic = allMusicOG
+    // Render playlist
     loadPlaylist()
+    // Load 1st song to the player
     loadMusic(musicIndex)
 
+    // Create a map which maps artist to the song, optimization to filter.
     allMusic.forEach(function(item){
     if(artistMap[item.artist]==undefined)
         artistMap[item.artist]=[]
@@ -127,7 +130,7 @@ function playingSong(){
       allLiTag[j].classList.add("playing")
       audioTag.innerText = "Playing"
     }
-
+    // add onclick listner to the attributes after rendering
     allLiTag[j].setAttribute("onclick", "clicked(this)")
   }
 }
